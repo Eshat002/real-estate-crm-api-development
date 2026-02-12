@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-
+from rest_framework import permissions
 from customers.models import Customer
 from .serializers import CustomerSerializer
 from customers.services import deactivate_customer
@@ -12,6 +12,7 @@ class CustomerViewSet(ModelViewSet):
     queryset = Customer.objects.all()
 
     pagination_class = CustomerCursorPagination
+    permission_classes =[permissions.IsAuthenticated, permissions.IsAdminUser]
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ["first_name", "last_name", "email", "phone"]
