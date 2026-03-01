@@ -8,8 +8,9 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/v1/", include("customers.api.urls")),
-    path("auth/", include("djoser.urls")),
-    path("auth/", include("djoser.urls.jwt")),
+    path("api/auth/", include("accounts.api.urls")),      # your custom JWT
+    path("api/auth/", include("djoser.urls")),        # djoser core
+    path("api/auth/", include("djoser.urls.jwt")),    # djoser JWT
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]

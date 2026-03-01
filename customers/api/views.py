@@ -11,8 +11,8 @@ class CustomerViewSet(ModelViewSet):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
 
-    pagination_class = CustomerCursorPagination
-    permission_classes =[permissions.IsAuthenticated, permissions.IsAdminUser]
+    # pagination_class = CustomerCursorPagination
+    permission_classes =[permissions.IsAuthenticated,   permissions.IsAdminUser]
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ["first_name", "last_name", "email", "phone"]
