@@ -6,6 +6,7 @@ from customers.models import Customer
 from .serializers import CustomerSerializer
 from customers.services import deactivate_customer
 from .pagination import CustomerCursorPagination
+from customers.filters import CustomerFilter
 
 class CustomerViewSet(ModelViewSet):
     serializer_class = CustomerSerializer
@@ -13,13 +14,14 @@ class CustomerViewSet(ModelViewSet):
     print(queryset.count())
 
     # pagination_class = CustomerCursorPagination
-    permission_classes =[permissions.IsAuthenticated, permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ["first_name", "last_name", "email", "phone"]
+    filterset_class = CustomerFilter  
     ordering_fields = ["created_at", "first_name"]
     ordering = ["created_at"]
-    filterset_fields = ["is_active", "first_name", "last_name", "email"]
+    # filterset_fields = ["is_active", "first_name", "last_name", "email"]
 
-    # def perform_destroy(self, instance):
-    #     deactivate_customer(instance)   
+    def perform_destroy(self, instance):
+        deactivate_customer(instance)
