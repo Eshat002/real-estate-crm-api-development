@@ -10,9 +10,10 @@ from .pagination import CustomerCursorPagination
 class CustomerViewSet(ModelViewSet):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
+    print(queryset.count())
 
     # pagination_class = CustomerCursorPagination
-    permission_classes =[permissions.IsAuthenticated,   permissions.IsAdminUser]
+    permission_classes =[permissions.IsAuthenticated, permissions.IsAdminUser]
 
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ["first_name", "last_name", "email", "phone"]
@@ -20,5 +21,5 @@ class CustomerViewSet(ModelViewSet):
     ordering = ["created_at"]
     filterset_fields = ["is_active", "first_name", "last_name", "email"]
 
-    def perform_destroy(self, instance):
-        deactivate_customer(instance)   
+    # def perform_destroy(self, instance):
+    #     deactivate_customer(instance)   
