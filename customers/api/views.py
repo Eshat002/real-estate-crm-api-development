@@ -11,8 +11,7 @@ from customers.filters import CustomerFilter
 class CustomerViewSet(ModelViewSet):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
-    print(queryset.count())
-
+ 
     # pagination_class = CustomerCursorPagination
     permission_classes = [permissions.IsAuthenticated, permissions.IsAdminUser]
 

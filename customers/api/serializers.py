@@ -3,7 +3,8 @@ from ..models import Customer
 
 
 class CustomerSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
+    full_name = serializers.ReadOnlyField()
+    full_address = serializers.ReadOnlyField()
 
     class Meta:
         model = Customer
@@ -14,11 +15,14 @@ class CustomerSerializer(serializers.ModelSerializer):
             "full_name",
             "email",
             "phone",
-            "address",
+            "street",
+            "city",
+            "state",
+            "zip_code",
+            "full_address",
             "is_active",
             "created_at",
             "updated_at",
         ]
 
-    def get_full_name(self, obj):
-        return f"{obj.first_name} {obj.last_name}"
+ 
