@@ -15,6 +15,9 @@ class Customer(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+       return f"{self.first_name} {self.last_name}"
+
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
